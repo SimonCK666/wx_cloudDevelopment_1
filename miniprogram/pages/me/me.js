@@ -5,22 +5,50 @@ Page({
  * 页面的初始数据
  */
 data: {
-    userInfo: {}
+    userInfo: wx.getStorageSync('userInfo') || {}
 },
 
 onGetUserInfo(e) {
-    console.log(e)
+    // console.log(e)
     let userInfo = e.detail.userInfo
     // 需要调用云函数，获取用户的openid
     wx.cloud.callFunction({
         name: 'login',
         complete: res=> {
-            console.log(res)
+            // console.log(res)
             userInfo.openid = res.result.openid
             this.setData({
                 userInfo
             })
             console.log(userInfo.openid)
+
+            // 写入本地缓存
+            wx.setStorageSync('userInfo', userInfo)
+        }
+    })
+},
+
+
+// 添加图书 => 调用云函数
+addBook(isbn) {
+    // 调用云函数
+    wx.cloud.callFunction({
+        name: "getDouban",
+        data: {isbn},
+        success:({result})=>{
+            console.log(result)
+        }
+    })
+    // 云函数写一个爬虫
+},
+
+// 图书扫码
+scanCode() {
+    wx.scanCode({
+        success:res=> {
+            console.log(res.result)
+            // 图书的 isbn 号， 去豆瓣获取详情
+            this.addBook(res.result)
         }
     })
 },

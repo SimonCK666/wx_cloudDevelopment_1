@@ -2,14 +2,12 @@
 
 <view class="user-container">
     <view wx:if="{{userinfo.openid}}">
-    <!-- <view> -->
         <image class="avatar" src="{{userinfo.avatarUrl}}" />
         <view>
             {{userInfo.nickName}}
         </view>
     </view>
     <view wx:else>
-    <!-- <view> -->
         <image class="avatar" src="http://pic.616pic.com/ys_bnew_img/00/53/11/dhsAzYoGFW.jpg" />
         <!-- <mp-icon icon="add" color="black" size="{{25}}"></mp-icon> -->
         <view class="avatar-button">
@@ -20,5 +18,10 @@
             </button>
         </view>
     </view>
-    <text>个人中心</text>
+    <!-- <text>个人中心</text> -->
+
+    <view>
+        <button wx:if="{{userInfo.openid}}" type="warn" bindtap="scanCode">Add Books</button>
+        <button wx:else type="warn" open-type="contact">Contact</button>
+    </view>
 </view>
