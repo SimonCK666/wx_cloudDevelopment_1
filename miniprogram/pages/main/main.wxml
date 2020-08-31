@@ -1,0 +1,10 @@
+<!--pages/main/main.wxml-->
+<view class="" hover-class="none" hover-stop-propagation="false">
+    <!-- <text> 首页 </text> -->
+    <view class="book-info" wx:for="{{books}}">
+        <image class="book-cover" src="{{item.image}}" />
+        <view>
+            {{item.title}}
+        </view>
+    </view>
+</view>

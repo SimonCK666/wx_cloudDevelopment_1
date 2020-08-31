@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/main/main",
     "pages/me/me",
     "pages/index/index",
 
@@ -28,7 +29,7 @@
     "selectedColor": "#EA5149",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/main/main",
         "text": "首页",
         "iconPath": ""
       },

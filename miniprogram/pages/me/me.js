@@ -1,3 +1,6 @@
+// const { DBRef } = require("bson")
+const db = wx.cloud.database()
+
 // pages/me/me.js
 Page({
 
@@ -37,6 +40,17 @@ addBook(isbn) {
         data: {isbn},
         success:({result})=>{
             console.log(result)
+            db.collection('doubanbooks').add({
+                data: result
+            }).then(res=>{
+                if (res._id) {
+                    wx.showModal({
+                        title: "添加成功",
+                        content: `《${result.title}》添加成功`
+                    })
+                }
+                console.log(res)
+            })
         }
     })
     // 云函数写一个爬虫
